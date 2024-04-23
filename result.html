@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="./result.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Quiz Results</h2>
+      <div id="quizResults"></div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const quizData = JSON.parse(localStorage.getItem("quizData"));
+
+        const quizResultsContainer = document.getElementById("quizResults");
+
+        const totalQuestions = 5; 
+
+        if (quizData) {
+          const correctAnswers = {
+            q1: "4",
+            q2: "5",
+            q3: "3",
+            q4: "2",
+            q5: "6",
+          };
+
+          const totalAttempted = Object.keys(quizData).length;
+
+          let correctCount = 0;
+
+          for (const question in quizData) {
+            const userAnswer = quizData[question];
+            const correctAnswer = correctAnswers[question];
+            if (userAnswer === correctAnswer) {
+              correctCount++;
+            }
+          }
+
+          quizResultsContainer.innerHTML = `
+                    <h3>Quiz Results:</h3>
+                    <p>Total number of questions attempted: ${totalAttempted} out of ${totalQuestions}</p>
+                    <p>Number of correct answers: ${correctCount}</p>
+                `;
+        } else {
+          quizResultsContainer.textContent = "No quiz data found.";
+        }
+      });
+    </script>
+  </body>
+</html>

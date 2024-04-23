@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Form</title>
+    <link rel="stylesheet" href="./form.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="studentForm" action="">
+        <h1>Enter Student Details</h1>
+        <div class="inputs">
+          <div class="input_groups">
+            <input
+              type="text"
+              class="rollNo"
+              placeholder="Roll No"
+            />
+            <div class="msg rmsg"></div>
+          </div>
+          <div class="input_groups">
+            <input type="text" class="sname" placeholder="Name" />
+            <div class="msg nmsg"></div>
+          </div>
+          <div class="input_groups">
+            <input
+              type="text"
+              class="batch"
+              placeholder="Batch"
+            />
+            <div class="msg smsg"></div> <br>
+          <div class="input_groups">
+            <input
+              type="text"
+              class="section"
+              placeholder="section"
+            />
+            <div class="msg smsg"></div>
+          </div>
+          <button type="button" class="submitBtn">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const rollNo = document.querySelector(".rollNo");
+        const section = document.querySelector(".section");
+        const sname = document.querySelector(".sname");
+        const rmsg = document.querySelector(".rmsg");
+        const smsg = document.querySelector(".smsg");
+        const nmsg = document.querySelector(".nmsg");
+        const submitBtn = document.querySelector(".submitBtn");
+
+        submitBtn.addEventListener("click", function (e) {
+          if (rollNo.value === "") {
+            rmsg.innerHTML = "please write your Roll no..!";
+            e.preventDefault();
+            rollNo.focus();
+          } else if (rollNo.value.length < 2) {
+            rmsg.innerHTML = "Your Roll no Digits is less than 2..!";
+            e.preventDefault();
+            rollNo.focus();
+          } else if (sname.value === "") {
+            rmsg.innerHTML = "";
+            nmsg.innerHTML = "Please write your name..!";
+            e.preventDefault();
+            sname.focus();
+          } else if (sname.value.length < 4) {
+            nmsg.innerHTML = "Your name char is less than 4..!";
+            e.preventDefault();
+            sname.focus();
+          } else if (section.value === "") {
+            nmsg.innerHTML = "";
+            smsg.innerHTML = "please write your section..!";
+            e.preventDefault();
+            section.focus();
+          } else if (section.value.length < 1) {
+            nmsg.innerHTML = "";
+            smsg.innerHTML = "your char is less than 2..!";
+            e.preventDefault();
+            section.focus();
+          } else {
+            rmsg.innerHTML = "";
+            nmsg.innerHTML = "";
+            smsg.innerHTML = "";
+
+            const studentData = {
+              rollNo: rollNo.value,
+              name: sname.value,
+              section: section.value,
+            };
+
+            localStorage.setItem("studentData", JSON.stringify(studentData));
+
+            document.getElementById("studentForm").reset();
+            window.location.href = "./quiz.html";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
