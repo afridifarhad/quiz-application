@@ -72,12 +72,17 @@
           const q4 = document.querySelector('input[name="q4"]:checked');
           const q5 = document.querySelector('input[name="q5"]:checked');
 
+          if (!q1 || !q2 || !q3 || !q4 || !q5) {
+            alert("Please answer all the questions before submitting.");
+            return;
+          }
+
           const quizData = {
-            q1: q1 ? q1.value : null,
-            q2: q2 ? q2.value : null,
-            q3: q3 ? q3.value : null,
-            q4: q4 ? q4.value : null,
-            q5: q5 ? q5.value : null,
+            q1: q1.value,
+            q2: q2.value,
+            q3: q3.value,
+            q4: q4.value,
+            q5: q5.value,
           };
 
           localStorage.setItem("quizData", JSON.stringify(quizData));
